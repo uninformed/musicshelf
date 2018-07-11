@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Master List{% endblock %}
+
+{% block content %}
+<table class='mastertable'>
+  <tr class='head'>
+    <th>Title</th>
+    <th>Artist</th>
+    <th>Year</th>
+    <th>Certification</th>
+    <th>Discogs master entry</th>
+  </tr>
+  {% for master in masters %}
+  <tr>
+    <td><a href="/master/{{ master['top_id'] }}">{{ master['title'] }}</a></td>
+    <td>{{ master['artist'] }}</td>
+    <td>{{ master['year'] }}</td>
+    <td>{{ master['cert'] }}</td>
+    <td><a href="https://discogs.com/master/{{ master['discogs_rid'] }}"> {{ master['discogs_mid'] }}</a></td>
+  </tr>
+  {% endfor %}
+</table>
+<em>{{ masters|length }} found.</em>
+
+{% endblock %}

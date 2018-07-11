@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+<link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+
+{% block fnnav %}
+  <li><a href="/">Master list</a></li>
+  {% if g.user %}
+  <li>Master actions</li>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>{%block title %}{{ master['artist'] }} - {{ master['title'] }} ({{ master['year'] }}){% endblock %}</h1>
+
+<h2>Releases in collection:</h2>
+<table class='releasetable'>
+  <tr class='head'>
+    <th>Catalog Number</th>
+    <th>Label</th>
+    <th>Format</th>
+    <th>Discogs Release</th>
+    <th>Notes</th>
+    <th></th>
+  </tr>
+  {% for release in releases %}
+  <tr>
+    <td>{{ release['cat_no'] }}</td>
+    <td>{{ release['label'] }}</td>
+    <td>{{ release['mtype'] }}, {{ release['stype'] }}</td>
+    <td><a href="https://discogs.com/release/{{ release['discogs_rid'] }}"> {{ release['discogs_rid'] }}</a></td>
+    <td>???</td>
+    {% if g.user %}
+    <td><a>Edit</a> <a>Delete</a></td>
+    {% endif %}
+  </tr>
+  {% endfor %}
+</table>
+<em>{{ releases|length }} found.</em>
+
+{% endblock %}
