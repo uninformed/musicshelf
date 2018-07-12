@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template
 from flaskext.mysql import MySQL
-from werkzeug.security import generate_password_hash
+#from werkzeug.security import generate_password_hash
 
 def create_app(test_config=None):
     """
@@ -13,17 +13,11 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     # the following is for temporary testing purposes
     app.config.from_mapping(
-        SECRET_KEY='dev',
-        OWNER_USER='owner',
-        OWNER_PASS=generate_password_hash('dev'),
-        MYSQL_HOST='localhost',
-        MYSQL_USER='msuser',
-        MYSQL_PASS='qwe%6&iopVGB',
-        MYSQL_DB='ms'
+        SECRET_KEY='dev'    #TEMP
     )
     if test_config is None:
         # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py', silent=True)
+        app.config.from_pyfile('config.py', silent=False)
     else:
         # load the test config if passed in
         app.config.from_mapping(test_config)
