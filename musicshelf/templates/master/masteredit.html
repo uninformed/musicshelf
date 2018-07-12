@@ -18,21 +18,21 @@
   <label for="year">Year</label>
   <input name="year" id="year" value="{{ master['year'] }}" required>
   <label for="genres">Genre(s)</label>
-  <input name="genres" id="genres" value="{{ master['genres'] }}" required>
+  <input name="genres" id="genres" value="{{ master['genres'] }}" >
   <label for="producer">Producer</label>
-  <input name="producer" id="producer" value="{{ master['producer'] }}" required>
+  <input name="producer" id="producer" value="{{ master['producer'] }}" >
   <label for="cover_designer">Cover designer</label>
-  <input name="cover_designer" id="cover_designer" value="{{ master['cover_designer'] }}" required>
+  <input name="cover_designer" id="cover_designer" value="{{ master['cover_designer'] }}" >
   <label for="discogs_mid">Discogs master ID</label>
-  <input name="discogs_mid" id="discogs_mid" value="{{ master['discogs_mid'] }}" required>
+  <input name="discogs_mid" id="discogs_mid" value="{{ master['discogs_mid'] }}" >
   <label for="cert">Certification</label>
-  <input name="cert" id="cert" value="none" type="radio" required> None
-  <input name="cert" id="cert" value="gold" type="radio" required> Gold
-  <input name="cert" id="cert" value="platinum" type="radio" required> Platinum
-  <input name="cert" id="cert" value="multi-platinum" type="radio" required> Multi-platinum
-  <input name="cert" id="cert" value="diamond" type="radio" required> Diamond
+  <input name="cert" id="cert" value="none" type="radio"> None
+  <input name="cert" id="cert" value="gold" type="radio"> Gold
+  <input name="cert" id="cert" value="platinum" type="radio"> Platinum
+  <input name="cert" id="cert" value="multi-platinum" type="radio"> Multi-platinum
+  <input name="cert" id="cert" value="diamond" type="radio"> Diamond
   <label for="comments">Comments</label>
-  <textarea name="comments" id="comments" value="{{ master['comments'] }}"></textarea>
+  <textarea name="comments" id="comments" >{{ master['comments'] }}</textarea>
   <input type="submit" value="Submit">
 </form>
 

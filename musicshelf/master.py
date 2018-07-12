@@ -1,5 +1,6 @@
-from flask import Blueprint, flash, g, redirect, render_template, request, url_for
+from flask import Blueprint, flash, g, redirect, render_template, request, url_for, Markup
 from werkzeug.exceptions import abort
+import markdown
 
 from musicshelf.user import login_required
 from musicshelf.db import get_db
@@ -18,12 +19,16 @@ def masterdetail(id):
         ' WHERE top_id = ' + str(id)
     )
     master = cursor.fetchone()
+    # parse Markdown in the comments
+    master['comments'] = Markup(markdown.markdown(master['comments']))
+
+    # get release data
     cursor.execute(
         'SELECT * FROM msrelease R'
         ' WHERE top_id='+str(id)
     )
-    # get release data
     releases = cursor.fetchall()
+
     return render_template('master/masterdetail.html', master=master, releases=releases)
 
 

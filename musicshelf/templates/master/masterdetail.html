@@ -10,6 +10,15 @@
 {% block content %}
 <h1>{%block title %}{{ master['artist'] }} - {{ master['title'] }} ({{ master['year'] }}){% endblock %}</h1>
 
+<ul>
+  <li>Genre(s): {{ master['genres'] }}</li>
+  <li>Certification: {{ master['cert'] }}</li>
+  <li>Producer: {{ master['producer'] }}</li>
+  <li>Cover designer: {{ master['cover_designer'] }}</li>
+</ul>
+
+<div id="comments">{{ master['comments'] }}</div>
+
 <h2>Releases in collection:</h2>
 <table class='releasetable'>
   <tr class='head'>
