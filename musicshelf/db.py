@@ -17,7 +17,8 @@ def get_db():
             password=current_app.config['MYSQL_PASS'],
             db=current_app.config['MYSQL_DB'],
             charset='utf8mb4',
-            cursorclass=pymysql.cursors.DictCursor
+            cursorclass=pymysql.cursors.DictCursor,
+            autocommit=True
         )
     return g.db
 
