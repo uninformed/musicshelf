@@ -13,11 +13,12 @@ def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
     # the following is for temporary testing purposes
     app.config.from_mapping(
-        SECRET_KEY='dev'    #TEMP
+        SECRET_KEY='dev',    #TEMP
+        CONFIGURED=False
     )
     if test_config is None:
         # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('config.py', silent=False)
+        app.config.from_pyfile('config.py', silent=True)
     else:
         # load the test config if passed in
         app.config.from_mapping(test_config)
@@ -28,39 +29,35 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from . import db
-    db.init_app(app)
+    if not app.config['CONFIGURED']:
+        # TODO import and register the setup blueprint
 
-    from . import user
-    app.register_blueprint(user.bp)
+        @app.route('/')
+        def hello():
+            # TODO make this show a setup welcome page
+            return 'Placeholder for the setup welcome page!'
 
-    from . import master
-    app.register_blueprint(master.bp)
+    else:
+        from . import db
+        db.init_app(app)
 
-    @app.route('/')
-    def index():
-        """
-        The index page: show the collection.
-        """
-        cursor = db.get_db().cursor()
-        cursor.execute(
-            'SELECT * FROM msmaster ORDER BY artist, year;'
-        )
-        masters = cursor.fetchall()
-        return render_template('index.html', masters=masters)
+        from . import user
+        app.register_blueprint(user.bp)
 
-    @app.route('/setup')
-    def setup():
-        """
-        STUB: Walk the user through first-time setup.
-        """
-        return 'Not yet implemented!'
+        from . import master
+        app.register_blueprint(master.bp)
 
-    @app.route('/hello')
-    def hello():
-        """
-        Test page to ensure the server is working.
-        """
-        return 'Hello, World! The server is still working!'
+        @app.route('/')
+        def index():
+            """
+            The index page: show the collection.
+            """
+            cursor = db.get_db().cursor()
+            cursor.execute(
+                'SELECT * FROM msmaster ORDER BY artist, year;'
+            )
+            masters = cursor.fetchall()
+            return render_template('index.html', masters=masters)
+
 
     return app
