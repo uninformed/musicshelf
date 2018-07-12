@@ -25,3 +25,52 @@ def masterdetail(id):
     # get release data
     releases = cursor.fetchall()
     return render_template('master/masterdetail.html', master=master, releases=releases)
+
+
+@bp.route('/<int:id>/edit', methods=('GET', 'POST'))
+@login_required
+def masteredit(id):
+    """
+    Edit the master details.
+    """
+    cursor = get_db().cursor()
+    # check whether we're processing the submitted form
+    if request.method == 'POST':
+        # gather variables
+        title = request.form['title']
+        artist = request.form['artist']
+        cert = request.form['cert']
+        year = request.form['year']
+        genres = request.form['genres']
+        producer = request.form['producer']
+        cover_designer = request.form['cover_designer']
+        discogs_mid = request.form['discogs_mid']
+        comments = request.form['comments']
+
+        error = None
+
+        # a little validation
+        if cert not in ['none', 'gold', 'platinum', 'multi-platinum', 'diamond']:
+            error = 'Invalid certification.'
+        elif int(year) < 1900:
+            error = 'Invalid year.'
+        #TODO think of more, maybe?
+
+        if error is None:
+            ret = cursor.execute(
+                'UPDATE msmaster'
+                ' SET title=%s, artist=%s, cert=%s, year=%s, genres=%s, producer=%s, cover_designer=%s, discogs_mid=%s, comments=%s'
+                ' WHERE top_id=%s',
+                (title, artist, cert, year, genres, producer, cover_designer, discogs_mid, comments, id)
+            )
+
+            return redirect(url_for('index'))
+        flash(error)
+
+    # get the current data to stick into the form
+    cursor.execute(
+        'SELECT * FROM msmaster M'
+        ' WHERE M.top_id='+str(id)
+    )
+    master = cursor.fetchone()
+    return render_template('master/masteredit.html', master=master)
