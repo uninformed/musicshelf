@@ -26,11 +26,11 @@
   <label for="discogs_mid">Discogs master ID</label>
   <input name="discogs_mid" id="discogs_mid" value="{{ master['discogs_mid'] }}" >
   <label for="cert">Certification</label>
-  <input name="cert" id="cert" value="none" type="radio"> None
-  <input name="cert" id="cert" value="gold" type="radio"> Gold
-  <input name="cert" id="cert" value="platinum" type="radio"> Platinum
-  <input name="cert" id="cert" value="multi-platinum" type="radio"> Multi-platinum
-  <input name="cert" id="cert" value="diamond" type="radio"> Diamond
+  <span class="radio"><input name="cert" id="cert" value="none" type="radio"> None</span>
+  <span class="radio"><input name="cert" id="cert" value="gold" type="radio"> Gold</span>
+  <span class="radio"><input name="cert" id="cert" value="platinum" type="radio"> Platinum</span>
+  <span class="radio"><input name="cert" id="cert" value="multi-platinum" type="radio"> Multi-platinum</span>
+  <span class="radio"><input name="cert" id="cert" value="diamond" type="radio"> Diamond</span>
   <label for="comments">Comments</label>
   <textarea name="comments" id="comments" >{{ master['comments'] }}</textarea>
   <input type="submit" value="Submit">

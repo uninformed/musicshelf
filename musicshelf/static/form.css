@@ -1,0 +1,22 @@
+form {
+  margin: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+input, textarea {
+  margin-bottom: 1em;
+}
+
+
+
+textarea {
+  min-height: 12em;
+  resize: vertical;
+  font-family: serif;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
