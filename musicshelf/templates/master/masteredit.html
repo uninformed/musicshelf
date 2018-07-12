@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block fnnav %}
-  <li><a href="/master/{{ master['top_id'] }}">Back to master entry</a></li>
+  <li><a href="{{ url_for('master.masterdetail', id=master['top_id']) }}">Back to master entry</a></li>
   {% if g.user %}
 
   {% endif %}

@@ -1,11 +1,19 @@
 from flask import Blueprint, flash, g, redirect, render_template, request, url_for, Markup
 from werkzeug.exceptions import abort
-import markdown
+import markdown, re
 
 from musicshelf.user import login_required
 from musicshelf.db import get_db
 
 bp = Blueprint('master', __name__, url_prefix='/master')
+
+@bp.route('/new')
+@login_required
+def new():
+
+
+
+    return render_template('master/new.html')
 
 @bp.route('/<int:id>')
 def masterdetail(id):
@@ -52,6 +60,9 @@ def masteredit(id):
         discogs_mid = request.form['discogs_mid']
         comments = request.form['comments']
 
+        # attempt to filter out <script> tags
+        comments = re.sub('<(\/?)script', '<\\1code', comments)
+
         error = None
 
         # a little validation
@@ -69,7 +80,7 @@ def masteredit(id):
                 (title, artist, cert, year, genres, producer, cover_designer, discogs_mid, comments, id)
             )
 
-            return redirect(url_for('index'))
+            return redirect(url_for('master.masterdetail', id=id))
         flash(error)
 
     # get the current data to stick into the form
