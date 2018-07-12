@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block fnnav %}
+  <li><a href="/master/{{ master['top_id'] }}">Back to master entry</a></li>
+  {% if g.user %}
+
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>{%block title %}Editing {{ master['artist'] }} - {{ master['title'] }}{% endblock %}</h1>
+
+<form method="post">
+  <label for="title">Title</label>
+  <input name="title" id="title" value="{{ master['title'] }}" required>
+  <label for="artist">Artist</label>
+  <input name="artist" id="artist" value="{{ master['artist'] }}" required>
+  <label for="year">Year</label>
+  <input name="year" id="year" value="{{ master['year'] }}" required>
+  <label for="genres">Genre(s)</label>
+  <input name="genres" id="genres" value="{{ master['genres'] }}" required>
+  <label for="producer">Producer</label>
+  <input name="producer" id="producer" value="{{ master['producer'] }}" required>
+  <label for="cover_designer">Cover designer</label>
+  <input name="cover_designer" id="cover_designer" value="{{ master['cover_designer'] }}" required>
+  <label for="discogs_mid">Discogs master ID</label>
+  <input name="discogs_mid" id="discogs_mid" value="{{ master['discogs_mid'] }}" required>
+  <label for="cert">Certification</label>
+  <input name="cert" id="cert" value="none" type="radio" required> None
+  <input name="cert" id="cert" value="gold" type="radio" required> Gold
+  <input name="cert" id="cert" value="platinum" type="radio" required> Platinum
+  <input name="cert" id="cert" value="multi-platinum" type="radio" required> Multi-platinum
+  <input name="cert" id="cert" value="diamond" type="radio" required> Diamond
+  <label for="comments">Comments</label>
+  <textarea name="comments" id="comments" value="{{ master['comments'] }}"></textarea>
+  <input type="submit" value="Submit">
+</form>
+
+
+{% endblock %}

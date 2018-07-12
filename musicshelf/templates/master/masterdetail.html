@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
-<link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
 
 {% block fnnav %}
-  <li><a href="/">Master list</a></li>
   {% if g.user %}
   <li>Master actions</li>
+  <li><a href="/master/{{ master['top_id'] }}/edit">Edit master</a></li>
   {% endif %}
 {% endblock %}
 

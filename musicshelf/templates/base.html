@@ -2,17 +2,19 @@
 <title>{% block title %}{% endblock %} - MusicShelf</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
 <nav>
   <h1>MusicShelf</h1>
   <ul id="fnnav">
+    <li><a href="/">Master list</a></li>
     {% block fnnav %}{% endblock %}
   </ul>
   <ul id="login">
     {% if g.user %}
-      <li><span>{{ g.user }}</span>
-      <li><a href="{{ url_for('user.logout') }}">Log Out</a>
+      <li><span>{{ g.user }}</span></li>
+      <li><a href="{{ url_for('user.logout') }}">Log Out</a></li>
     {% else %}
-      <li><a href="{{ url_for('user.login') }}">Log In</a>
+      <li><a href="{{ url_for('user.login') }}">Log In</a></li>
     {% endif %}
   </ul>
 </nav>
