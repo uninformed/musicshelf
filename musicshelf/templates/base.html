@@ -7,6 +7,10 @@
   <h1>MusicShelf</h1>
   <ul id="fnnav">
     <li><a href="/">Master list</a></li>
+    <li><a href="" class="inactive">Search collection</a></li>
+    {% if g.user %}
+    <li><a href="{{ url_for('master.new') }}">New master</a></li>
+    {% endif %}
     {% block fnnav %}{% endblock %}
   </ul>
   <ul id="login">
