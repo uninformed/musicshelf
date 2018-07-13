@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block fnnav %}
+
+  {% if g.user %}
+
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<h1>{%block title %}New master entry{% endblock %}</h1>
+
+<form method="post">
+  <label for="title">Title</label>
+  <input name="title" id="title" required>
+  <label for="artist">Artist</label>
+  <input name="artist" id="artist" required>
+  <label for="year">Year</label>
+  <input name="year" id="year" required>
+  <label for="genres">Genre(s)</label>
+  <input name="genres" id="genres"  >
+  <label for="producer">Producer</label>
+  <input name="producer" id="producer" >
+  <label for="cover_designer">Cover designer</label>
+  <input name="cover_designer" id="cover_designer" >
+  <label for="discogs_mid">Discogs master ID</label>
+  <input name="discogs_mid" id="discogs_mid"  >
+  <label for="cert">Certification</label>
+  <span class="radio"><input name="cert" id="cert" value="none" type="radio"> None</span>
+  <span class="radio"><input name="cert" id="cert" value="gold" type="radio"> Gold</span>
+  <span class="radio"><input name="cert" id="cert" value="platinum" type="radio"> Platinum</span>
+  <span class="radio"><input name="cert" id="cert" value="multi-platinum" type="radio"> Multi-platinum</span>
+  <span class="radio"><input name="cert" id="cert" value="diamond" type="radio"> Diamond</span>
+  <label for="comments">Comments</label>
+  <textarea name="comments" id="comments" ></textarea>
+  <input type="submit" value="Submit">
+</form>
+
+
+{% endblock %}
