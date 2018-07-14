@@ -2,6 +2,10 @@
 
 {% block title %}Master List{% endblock %}
 
+{% block includes %}
+<link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+{% endblock %}
+
 {% block content %}
 <table class='mastertable'>
   <tr class='head'>

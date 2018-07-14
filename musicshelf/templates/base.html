@@ -1,8 +1,8 @@
 <!doctype html>
 <title>{% block title %}{% endblock %} - MusicShelf</title>
+
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+{% block includes %}{% endblock %}
 <nav>
   <h1>MusicShelf</h1>
   <ul id="fnnav">

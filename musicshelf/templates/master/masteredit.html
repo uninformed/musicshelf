@@ -7,6 +7,10 @@
   {% endif %}
 {% endblock %}
 
+{% block includes %}
+<link rel="stylesheet" href="{{ url_for('static', filename='table.css') }}">
+{% endblock %}
+
 {% block content %}
 <h1>{%block title %}Editing {{ master['artist'] }} - {{ master['title'] }}{% endblock %}</h1>
 
