@@ -21,7 +21,8 @@ def masterdetail(id):
     )
     master = cursor.fetchone()
     # parse Markdown in the comments
-    master['comments'] = Markup(markdown.markdown(master['comments']))
+    if master['comments'] is not None:
+        master['comments'] = Markup(markdown.markdown(master['comments']))
 
     # get release data
     cursor.execute(
