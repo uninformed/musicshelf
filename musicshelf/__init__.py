@@ -47,6 +47,9 @@ def create_app(test_config=None):
         from . import master
         app.register_blueprint(master.bp)
 
+        from . import release
+        app.register_blueprint(release.bp)
+
         @app.route('/')
         def index():
             """
