@@ -66,3 +66,13 @@ def edit(rid):
 @login_required
 def delete(rid):
     return "STUB: Deleting release "+str(rid)
+
+@bp.route('/<int:rid>')
+def detail(rid):
+    cursor = get_db().cursor()
+    cursor.execute(
+        'SELECT * FROM msrelease WHERE rid=%s',
+        (rid)
+    )
+    release = cursor.fetchone()
+    return render_template('release/detail.html', release=release)

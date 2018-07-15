@@ -36,7 +36,7 @@
   </tr>
   {% for release in releases %}
   <tr>
-    <td>{{ release['cat_no'] }}</td>
+    <td><a href="{{ url_for('release.detail', rid=release['rid']) }}">{{ release['cat_no'] }}</a></td>
     <td>{{ release['label'] }}</td>
     <td>{{ release['mtype'] }}, {{ release['stype'] }}</td>
     <td><a href="https://discogs.com/release/{{ release['discogs_rid'] }}"> {{ release['discogs_rid'] }}</a></td>
