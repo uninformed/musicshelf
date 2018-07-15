@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block fnnav %}
+
+  {% if g.user %}
+
+  {% endif %}
+{% endblock %}
+
+{% block includes %}
+<link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+<script src="{{ url_for('static', filename='showhide.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<h1>{%block title %}Add release to {{ master['title'] }}{% endblock %}</h1>
+<a href="{{ url_for('master.masterdetail', id=master['top_id']) }}">Return to master entry</a>
+
+<form method="post">
+  <input type="hidden" id="top_id" name="top_id" value="{{ master['top_id'] }}">
+  <label for="cat_no">Catalog number</label>
+  <input name="cat_no" id="cat_no" required>
+  <label for="label">Label</label>
+  <input name="label" id="label" required>
+  <label for="ryear">Release year</label>
+  <input name="ryear" id="ryear" value="{{ master['year'] }}">
+  <label for="rcover_designer">Release cover designer</label>
+  <input name="rcover_designer" id="rcover_designer" value="{{ master['cover_designer'] }}">
+  <label for="discogs_rid">Discogs release ID</label>
+  <input name="discogs_rid" id="discogs_rid">
+  <label for="channels">Channels</label>
+  <span class="radio"><input name="channels" id="channels" value="stereo" type="radio" selected required> Stereo</span>
+  <span class="radio"><input name="channels" id="channels" value="mono" type="radio" required> Mono</span>
+  <span class="radio"><input name="channels" id="channels" value="quadrophonic" type="radio" required> Quadrophonic</span><br>
+
+  <label for="mtype">Type</label>
+  <span class="radio"><input name="mtype" id="mtype" value='vinyl' type="radio" oninput="hideAllBut('vinyl')" required>Vinyl</span>
+  <span class="radio"><input name="mtype" id="mtype" value='tape' type="radio" oninput="hideAllBut('tape')" required>Tape</span>
+  <span class="radio"><input name="mtype" id="mtype" value='optical' type="radio" oninput="hideAllBut('optical')" required>Optical</span>
+
+  <fieldset id="vinyl" class="hide" disabled>
+    <legend>Vinyl data</legend>
+    <label for="num">Number</label>
+    <span class="radio"><input name="num" id="num" value="1x" type="radio" selected required> 1x</span>
+    <span class="radio"><input name="num" id="num" value="2x" type="radio" required> 2x</span>
+    <span class="radio"><input name="num" id="num" value="3x" type="radio" required> 3x</span><br>
+    <label for="diameter">Diameter</label>
+    <span class="radio"><input name="diameter" id="diameter" value='7"' type="radio" required> 7"</span>
+    <span class="radio"><input name="diameter" id="diameter" value='12"' selected type="radio" required> 12"</span>
+    <span class="radio"><input name="diameter" id="diameter" value='10"' type="radio" required> 10"</span><br>
+    <label for="speed">Speed</label>
+    <span class="radio"><input name="speed" id="speed" value='33.3 rpm' selected type="radio" required>33.3 rpm</span>
+    <span class="radio"><input name="speed" id="speed" value='45 rpm' type="radio" required>45 rpm</span>
+    <span class="radio"><input name="speed" id="speed" value='78 rpm' type="radio" required>78 rpm</span><br>
+  </fieldset>
+
+  <fieldset id="tape" class="hide" disabled>
+    <legend>Tape data</legend>
+    <label for="num">Number</label>
+    <span class="radio"><input name="num" id="num" value="1x" type="radio" selected required> 1x</span>
+    <span class="radio"><input name="num" id="num" value="2x" type="radio" required> 2x</span>
+    <span class="radio"><input name="num" id="num" value="3x" type="radio" required> 3x</span><br>
+    <label for="tapetype">Kind</label>
+    <span class="radio"><input name="tapetype" id="tapetype" value="cassette" type="radio" selected required> Cassette</span>
+    <span class="radio"><input name="tapetype" id="tapetype" value="8-track" type="radio" required> 8-track</span>
+    <span class="radio"><input name="tapetype" id="tapetype" value="reel-to-reel" type="radio" required> Reel-to-reel</span><br>
+  </fieldset>
+
+  <fieldset id="optical" class="hide" disabled>
+    <legend>Optical data</legend>
+    <label for="num">Number</label>
+    <span class="radio"><input name="num" id="num" value="1x" type="radio" selected required> 1x</span>
+    <span class="radio"><input name="num" id="num" value="2x" type="radio" required> 2x</span>
+    <span class="radio"><input name="num" id="num" value="3x" type="radio" required> 3x</span><br>
+    <label for="opticaltype">Kind</label>
+    <span class="radio"><input name="opticaltype" id="opticaltype" value="cd" type="radio" selected required> CD</span>
+    <span class="radio"><input name="opticaltype" id="opticaltype" value="dvd" type="radio" required> DVD</span>
+    <span class="radio"><input name="opticaltype" id="opticaltype" value="minidisc" type="radio" required> Minidisc</span><br>
+  </fieldset>
+  <label for="notes">Notes</label>
+  <textarea name="notes" id="notes"></textarea>
+  <input type="submit" value="submit">
+</form>
+
+{% endblock %}

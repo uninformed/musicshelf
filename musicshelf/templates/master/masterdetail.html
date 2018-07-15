@@ -4,7 +4,7 @@
   {% if g.user %}
   <li>Master actions</li>
   <li><a href="/master/{{ master['top_id'] }}/edit">Edit master</a></li>
-  <li><a class='inactive' href="">Add release</a></li>
+  <li><a href="{{ url_for('release.new', mid=master['top_id']) }}">Add release</a></li>
   {% endif %}
 {% endblock %}
 
@@ -36,13 +36,14 @@
   </tr>
   {% for release in releases %}
   <tr>
-    <td>{{ release['cat_no'] }}</td>
+    <td><a href="{{ url_for('release.detail', rid=release['rid']) }}">{{ release['cat_no'] }}</a></td>
     <td>{{ release['label'] }}</td>
     <td>{{ release['mtype'] }}, {{ release['stype'] }}</td>
     <td><a href="https://discogs.com/release/{{ release['discogs_rid'] }}"> {{ release['discogs_rid'] }}</a></td>
     <td>???</td>
     {% if g.user %}
-    <td><a>Edit</a> <a>Delete</a></td>
+    <td><a href="{{ url_for('release.edit', rid=release['rid']) }}">Edit</a>
+      <a href="{{ url_for('release.delete', rid=release['rid']) }}">Delete</a></td>
     {% endif %}
   </tr>
   {% endfor %}
