@@ -60,7 +60,19 @@ def new(mid):
 @bp.route('/edit/<int:rid>', methods=('GET', 'POST'))
 @login_required
 def edit(rid):
-    return "STUB: Editing release "+str(rid)
+    """
+    Edit an existing release entry.
+    """
+    # get what data we have to send to the form
+    cursor = get_db().cursor()
+    cursor.execute(
+        'SELECT * FROM msrelease WHERE rid=%s',
+        (rid)
+    )
+    release = cursor.fetchone()
+    # TODO: process the values that go to radio buttons
+    return render_template('release/edit.html', release=release)
+
 
 @bp.route('/delete/<int:rid>', methods=('GET', 'POST'))
 @login_required
