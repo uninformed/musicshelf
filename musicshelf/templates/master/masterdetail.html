@@ -3,7 +3,7 @@
 {% block fnnav %}
   {% if g.user %}
   <li>Master actions</li>
-  <li><a href="/master/{{ master['top_id'] }}/edit">Edit master</a></li>
+  <li><a href="{{ url_for('master.masteredit', id=master['top_id']) }}">Edit master</a></li>
   <li><a href="{{ url_for('release.new', mid=master['top_id']) }}">Add release</a></li>
   {% endif %}
 {% endblock %}
