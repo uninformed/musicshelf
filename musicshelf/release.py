@@ -81,6 +81,9 @@ def delete(rid):
 
 @bp.route('/<int:rid>')
 def detail(rid):
+    """
+    Show release details.
+    """
     cursor = get_db().cursor()
     cursor.execute(
         'SELECT * FROM msrelease WHERE rid=%s',
