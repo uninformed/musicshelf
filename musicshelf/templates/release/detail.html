@@ -3,8 +3,8 @@
 {% block fnnav %}
 <li><a href="{{ url_for('master.masterdetail', id=release['top_id']) }}">Return to master</a></li>
   {% if g.user %}
-  <li>Release actions
-  <ul>
+  <li><a>Release actions</a>
+  <ul class="dd">
     <li><a href="{{ url_for('release.edit', rid=release['rid']) }}">Edit release</a></li>
     <li><a href="{{ url_for('release.delete', rid=release['rid']) }}">Delete release</a></li>
   </ul></li>

@@ -2,26 +2,28 @@
 <title>{% block title %}{% endblock %} - MusicShelf</title>
 
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+
 {% block includes %}{% endblock %}
-<nav>
-  <h1>MusicShelf</h1>
-  <ul id="fnnav">
+
+  <ul id="nav">
+    <li><a class="nolink">NMS</a class="nolink"></li>
     <li><a href="/">Master list</a></li>
     <li><a href="" class="inactive">Search collection</a></li>
     {% if g.user %}
     <li><a href="{{ url_for('master.new') }}">New master</a></li>
     {% endif %}
     {% block fnnav %}{% endblock %}
-  </ul>
-  <ul id="login">
+
     {% if g.user %}
-      <li><span>{{ g.user }}</span></li>
-      <li><a href="{{ url_for('user.logout') }}">Log Out</a></li>
+      <li class="login"><a class="nolink">{{ g.user }}</a></li>
+      <li class="login"><a href="{{ url_for('user.logout') }}">Log Out</a></li>
     {% else %}
-      <li><a href="{{ url_for('user.login') }}">Log In</a></li>
+      <li class="login"><a href="{{ url_for('user.login') }}">Log In</a></li>
     {% endif %}
   </ul>
-</nav>
+
+<div id="spacing"></div>
 <section class="content">
   <header>
     {% block header %}{% endblock %}
