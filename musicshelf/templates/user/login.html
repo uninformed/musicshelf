@@ -4,6 +4,10 @@
   <h1>{% block title %}Log In{% endblock %}</h1>
 {% endblock %}
 
+{% block includes %}
+<link rel="stylesheet" href="{{ url_for('static', filename='form.css') }}">
+{% endblock %}
+
 {% block content %}
   <form method="post">
     <label for="username">Username</label>
