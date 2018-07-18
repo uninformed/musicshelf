@@ -17,6 +17,7 @@
 <a href="{{ url_for('master.masterdetail', id=release['top_id']) }}">Return to master entry</a>
 
 <form method="post">
+  <input type="hidden" id="rid" name="rid" value="{{ release['rid'] }}">
   <input type="hidden" id="top_id" name="top_id" value="{{ release['top_id'] }}">
   <label for="cat_no">Catalog number</label>
   <input name="cat_no" id="cat_no"  value="{{ release['cat_no'] }}" required>
@@ -78,7 +79,7 @@
     <span class="radio"><input name="opticaltype" id="opticaltype" value="minidisc" type="radio" required> Minidisc</span><br>
   </fieldset>
   <label for="notes">Notes</label>
-  <textarea name="notes" id="notes"></textarea>
+  <textarea name="notes" id="notes">{{ release['notes'] }}</textarea>
   <input type="submit" value="submit">
 </form>
 

@@ -63,8 +63,36 @@ def edit(rid):
     """
     Edit an existing release entry.
     """
-    # get what data we have to send to the form
     cursor = get_db().cursor()
+    if request.method == 'POST':
+        error = None
+        cat_no = request.form['cat_no']
+        label = request.form['label']
+        ryear = request.form['ryear']
+        rcover_designer = request.form['rcover_designer']
+        discogs_rid = request.form['discogs_rid']
+        mtype = request.form['mtype']
+        # assemble stype based on mtype
+        if mtype == "vinyl":
+            stype = request.form['num']+request.form['diameter']+', '+request.form['speed']
+        elif mtype == "tape":
+            stype = request.form['num']+request.form['tapetype']
+        elif mtype == "optical":
+            stype = request.form['num']+request.form['opticaltype']
+        else:
+            error = "Invalid item type: " + mtype
+        notes = request.form['notes']
+        rid = request.form['rid']
+        if error is None:
+            cursor.execute(
+            'UPDATE msrelease SET'
+            ' cat_no=%s, label=%s, ryear=%s, rcover_designer=%s, discogs_rid=%s, mtype=%s, stype=%s, notes=%s'
+            ' WHERE rid=%s',
+            (cat_no, label, ryear, rcover_designer, discogs_rid, mtype, stype, notes, rid)
+            )
+            return redirect(url_for('release.detail', rid=rid))
+        flash(error)
+    # get what data we have to send to the form
     cursor.execute(
         'SELECT * FROM msrelease WHERE rid=%s',
         (rid)
